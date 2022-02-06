@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -33,17 +34,17 @@ public class SeedRunnable implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // init services
-        var serviceRH = Department
+        Department serviceRH = Department
                             .builder()
                             .name("RH")
                             .location("Oujda")
                             .build();
-        var serviceIT = Department
+        Department serviceIT = Department
                             .builder()
                             .name("IT")
                             .location("Oujda")
                             .build();
-        var serviceAccounting =
+        Department serviceAccounting =
                         Department
                             .builder()
                             .name("Accounting")
@@ -53,15 +54,15 @@ public class SeedRunnable implements CommandLineRunner {
 
 
         // init employees
-        List<Employee> employees = List.of(
-                 Employee
-                         .builder()
-                         .name("Dan jack")
-                         .age(28)
-                         .function("Assistant RH")
-                         .salary(8_000.00F)
+        List<Employee> employees = Arrays.asList(
+                Employee
+                        .builder()
+                        .name("Dan jack")
+                        .age(28)
+                        .function("Assistant RH")
+                        .salary(8_000.00F)
                         .department(serviceRH)
-                         .build(),
+                        .build(),
                 Employee
                         .builder()
                         .name("John Doe")
@@ -91,7 +92,7 @@ public class SeedRunnable implements CommandLineRunner {
         log.info("saving services... {}",
                 serviceRepository
                         .saveAll(
-                                List.of(serviceRH, serviceAccounting, serviceIT)));
+                                Arrays.asList(serviceRH, serviceAccounting, serviceIT)));
 
         log.info("saving employees... {}",
                 employeeRepository
